@@ -34,7 +34,7 @@ public class TestCard {
 
     @Test (expected = IllegalArgumentException.class)
     public void checkCardCodeIsNotValidSoItThrowsError_1() {
-        card = new Card("x8");
+        card = new Card("sz28");
     }
 
     @Test (expected = IllegalArgumentException.class)
