@@ -6,10 +6,6 @@ public class TestCard {
 
     private Card card;
 
-    @Before
-    public void setUp() throws Exception {
-        card = new Card("hQ");
-    }
 
     @Test
     public void testGetValue() throws Exception {
@@ -18,7 +14,13 @@ public class TestCard {
 
     @Test
     public void checkCardCodeIsValid() {
-        assertEquals("hQ", card.cardCode);
+        card = new Card("Hq");
+        assertEquals("HQ", card.cardCode);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void checkCardCodeIsNotValid() {
+        card = new Card("f2");
     }
 
     @Test
@@ -29,23 +31,33 @@ public class TestCard {
 
     @Test
     public void getValueIfItsANumber() throws Exception {
+        card = new Card("hq");
         assertEquals(12, card.getValue());
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void checkCardCodeIsNotValidSoItThrowsError_1() {
-        card = new Card("sz28");
+    public void checkCardCodeIsOver10() {
+        card = new Card("s12");
     }
+
 
     @Test (expected = IllegalArgumentException.class)
-    public void checkCardCodeIsNotValidSoItThrowsError_2() {
-        card = new Card("HA_JA_FA");
+    public void checkCardValueIsUnder2() {
+        card = new Card("h1");
+    }
+
+    @Test
+    public void checkGetValueIsUnder10() {
+        card = new Card("h9");
+        assertEquals(9, card.getValue());
+    }
+
+    @Test
+    public void checkGetIntValueOfTheHighestCard() {
+        card = new Card("ha");
+        assertEquals(14, card.getValue());
     }
 
 
-    @After
-    public void tearDown() throws Exception {
-        card = null;
-    }
 
 }
